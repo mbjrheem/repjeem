@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_test_form_mbr" model="ir.ui.view">
+            <field name="name">mbr form</field>
+            <field name="model">mbr_mbr.mbr_mbr</field>
+            <field name="arch" type="xml">
+                <form string="class Moves">
+                    <header>
+                        <button name="action_class" states="draft" string='classify' type="object" class="oe_highlight" colors="red:state==draft;"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" statusbar_colors='{"draft":"red","confirmed":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group>
+                             <h1>
+                                 <field name="name" placeholder="classification description"/>
+                             </h1>
+                            <group colspan="4">
+                                <group>
+                                    <field name="product_id" on_change="onchange_product_id(product_id,location_id,location_dest_id,name, new_product_id)"/>
+                                    <field name="qty_available" attrs="{'invisible':[('state','=','done')]}"/>
+                                    <field name="new_product_id" on_change="onchange_product_id2(product_id,name, new_product_id)"/>
+                                    <label for="product_uom_qty" />
+                                    <div>
+                                    <field name="product_uom_qty" on_change="onchange_quantity(product_id, product_uom_qty, product_uom, product_uos)" class="oe_inline"/>
+                                    <field name="product_uom" string="Unit Of Measure"  class="oe_inline" invisible="1"/>
+                                </div>
+                                    <div groups="product.group_uos">
+                                        <field name="product_uos_qty"
+                                               class="oe_inline" on_change="onchange_uos_quantity(product_id, product_uos_qty, product_uos, product_uom)"/>
+                                        <field name="product_uos" class="oe_inline" />
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                                    <field name="location_id" groups="stock.group_locations" on_change= "onchange_location_id(location_id,product_id)"/>
+                                    <field name="location_dest_id" invisible="1"/>
+                                    <field name="picking_id" domain="[('picking_type_id','=',picking_type_id)]" invisible="1"/>
+                                </group>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_test_move_tree_mbr" model="ir.ui.view">
+            <field name="name">mbr tree</field>
+            <field name="model">mbr_mbr.mbr_mbr</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Moves">
+                    <field name="product_id" />
+                    <field name="new_product_id"/>
+                    <field name="product_uom_qty"/>
+                    <field name="product_uom" string="Unit of Measure" groups="product.group_uom"/>
+                    <field name="product_uos_qty" groups="product.group_uos"/>
+                    <field name="product_uos" groups="product.group_uos"/>
+                    <field name="location_id" groups="stock.group_locations"/>
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_mbr" model="ir.actions.act_window">
+            <field name="name">Reclassication</field>
+            <field name="res_model">mbr_mbr.mbr_mbr</field>
+            <field name="view_mode">form,tree</field>
+        </record>
+        <menuitem id="reclassify" name="Reclassification" parent="stock.menu_stock_root" sequence="6"/>
+        <menuitem id="test_sub_mbr" name="classification" sequence="1" parent="reclassify"/>
+        <menuitem id="test_move_menu_mbr" name="Reclassification" parent="test_sub_mbr" sequence="9" action="action_mbr"/>
+
+    </data>
+</openerp>

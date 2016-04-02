@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+	
+	   <record id="group_sale_level_one_max_discount" model="res.groups">
+        <field name="name">Level One Max Discount</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="category_id" ref="base.module_category_sales_management"/>
+    </record>
+
+
+
+	   <record id="group_sale_level_two_max_discount" model="res.groups">
+        <field name="name">Level Two Max Discount</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="category_id" ref="base.module_category_sales_management"/>
+    </record>
+
+
+     <record id="group_sale_director" model="res.groups">
+        <field name="name">Sale Director</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="category_id" ref="base.module_category_sales_management"/>
+    </record>
+
+</data>
+
+</openerp>

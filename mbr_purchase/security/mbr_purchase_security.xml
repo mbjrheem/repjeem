@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+    <!--
+
+    <record id="group_chief_operating_officer" model="res.groups">
+        <field name="name">Chief Operating Officer</field>
+        <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+
+    <record id="group_supply_chain" model="res.groups">
+        <field name="name">Supply Chain</field>
+        <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+
+    </record>
+
+
+
+    <record id="group_committee" model="res.groups">
+        <field name="name">Committee</field>
+      <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+
+-->
+
+	   <record id="group_purchase_level_one_max_amount" model="res.groups">
+        <field name="name">Level One Max Amount</field>
+        <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+
+
+	  <record id="group_purchase_level_two_max_amount" model="res.groups">
+        <field name="name">Level Two Max Amount</field>
+        <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+
+    <record id="group_purchase_level_three_max_amount" model="res.groups">
+        <field name="name">Level Three Max Amount</field>
+        <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+
+      <record id="group_purchase_committee" model="res.groups">
+        <field name="name">committee</field>
+        <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+
+    <!--
+	   <record id="group_purchase_level_three_max_amount" model="res.groups">
+        <field name="name">Level Three Max Amount</field>
+        <field name="implied_ids" eval="[(4, ref('base.purchase.group_purchase_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+
+
+    <record model="ir.rule" id="mbr_purchase_order_first_committee">
+        <field name="name">Purchase Order First Committee</field>
+        <field name="model_id" ref="mbr_purchase.model_purchase_order"/>
+        <field name="groups" eval="[(4, ref('group_purchase_first_committee'))]"/>
+        <field name="domain_force">[('state','in',['first_committee','approved'])]</field>
+    </record>
+
+
+     <record model="ir.rule" id="mbr_purchase_order_second_committee">
+        <field name="name">Purchase Order Second Committee</field>
+        <field name="model_id" ref="mbr_purchase.model_purchase_order"/>
+        <field name="groups" eval="[(4, ref('group_purchase_second_committee'))]"/>
+       <field name="domain_force">[('state','in',['first_committee','second_committee'])]</field>
+    </record>
+
+    -->
+
+</data>
+
+</openerp>

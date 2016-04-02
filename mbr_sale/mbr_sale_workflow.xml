@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+        <openerp>
+            <data>
+                <record id="mbr_sale_workflow" model="workflow">
+                    <field name="name">mbr.sale.workflow</field>
+                    <field name="osv">sale.order</field>
+                    <field name="on_create">True</field>
+                </record>
+
+                <record id="activity_first_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="mbr_sale_workflow"/>
+                    <field name="flow_start">True</field>
+                    <field name="name">first_approve</field>
+                    <field name="kind">dummy</field>
+                </record>
+
+                  <record id="activity_second_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="mbr_sale_workflow"/>
+                    <field name="flow_start">True</field>
+                    <field name="name">second_approve</field>
+                    <field name="kind">dummy</field>
+                </record>
+
+                  <record id="activity_third_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="mbr_sale_workflow"/>
+                    <field name="flow_start">True</field>
+                    <field name="name">third_approve</field>
+                    <field name="kind">dummy</field>
+                </record>
+
+
+
+
+                 <record id="activity_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="mbr_sale_workflow"/>
+                    <field name="flow_stop">True</field>
+                    <field name="name">approve</field>
+                    <field name="kind">function</field>
+                     <field name="action">button_approve()</field>
+                </record>
+
+                <!--  transition  -->
+
+                  <!--  transition  -->
+                <record id="trans_first_to_approve" model="workflow.transition">
+                    <field name="act_from" ref="activity_first_approve"/>
+                    <field name="act_to" ref="activity_approve"/>
+                    <field name="signal">button_first_approve</field>
+                    <field name="condition">(discount_total &lt; 5)</field>
+                </record>
+
+
+                <record id="trans_second_to_approve" model="workflow.transition">
+                    <field name="act_from" ref="activity_second_approve"/>
+                    <field name="act_to" ref="activity_approve"/>
+                    <field name="signal">button_second_approve</field>
+                    <field name="condition">(discount_total &lt; 7)</field>
+                </record>
+
+
+
+
+
+
+        </data>
+    </openerp>

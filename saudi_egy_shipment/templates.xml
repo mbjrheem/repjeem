@@ -1,0 +1,24 @@
+<openerp>
+    <data>
+         <record id="view_s_e_shipment" model="ir.ui.view">
+            <field name="name">shipment.order.form</field>
+            <field name="model">stock.picking</field>
+             <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                            <field name="driver_id" attrs="{'invisible': ['|',('state', '&lt;&gt;', 'assigned'),('picking_type_code','!=','egy'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="license_no" attrs="{'invisible': ['|',('state','&lt;&gt;','assigned'),('picking_type_code','!=','egy'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="truck_no" attrs="{'invisible': ['|',('state','&lt;&gt;', 'assigned'),('picking_type_code','!=','egy'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="mobile_no_sudan" attrs="{'invisible': ['|',('state', '&lt;&gt;', 'assigned'),('picking_type_code','!=','egy'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="mobile_no_egy" attrs="{'invisible': ['|',('state', '&lt;&gt;', 'assigned'),('picking_type_code','!=','egy')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="departure_date" attrs="{'invisible': ['|',('state', '&lt;&gt;', 'assigned'),('picking_type_code','!=','egy'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="expected_date" attrs="{'invisible':['|', ('state', '&lt;&gt;', 'assigned'),('picking_type_code','!=','egy'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="watsh_id" attrs="{'invisible': ['|',('state', '&lt;&gt;', 'assigned'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                            <field name="tracking_no" attrs="{'invisible': ['|',('state', '&lt;&gt;', 'assigned'),('picking_type_code','!=','egy'),('picking_type_code','!=','saudi')], 'required':['|',('picking_type_code','=','egy'),('picking_type_code','=','saudi'),('state','=','assigned')]}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>

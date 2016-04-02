@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+app_category_access_hr,app_category_access,base.model_ir_module_category,mbr_expense.group_hr_expesne_direct_manager,1,0,0,0

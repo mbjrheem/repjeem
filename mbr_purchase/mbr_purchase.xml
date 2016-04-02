@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+        <openerp>
+            <data>
+                <record id="view_form_purchase_order_inherited" model="ir.ui.view">
+                    <field name="name">MBR Purchase Order</field>
+                    <field name="model">purchase.order</field>
+                    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+                    <field name="arch" type="xml">
+
+
+                        <button name="button_done" position="before">
+                            <button name="button_first_approve" string="Confirm order"
+                                    attrs="{'invisible': [('state','in',('purchase'))]}"
+                                    groups="mbr_purchase.group_chief_operating_officer"/>
+                        </button>
+
+
+                         <button name="button_first_approve" position="after">
+                            <button name="button_second_approve" string="Confirm order"
+                                    attrs="{'invisible': [('state','in',('purchase'))]}"
+                                    groups="mbr_purchase.group_supply_chain"/>
+                         </button>
+
+                         <button name="button_second_approve" position="after">
+                            <button name="button_third_approve" string="Confirm order"
+                                     attrs="{'invisible': [('state','in',('purchase'))]}"
+                                    groups="mbr_purchase.group_committee"/>
+                        </button>
+
+                        <button name="button_confirm" position="attributes">
+                            <attribute name="type"></attribute>
+                            <attribute name="groups">purchase.group_purchase_manager</attribute>
+                        </button>
+
+                    <!--
+
+                        <button name="button_done" position="attributes">
+                        <attribute name="groups">mbr_purchase.group_purchase_director</attribute>
+                            <attribute name="attrs">{'invisible': [('state','not in',('second_committee'))]}</attribute>
+                        </button>
+
+
+
+                            <button name="button_cancel" position="attributes">
+                                <attribute name="states">draft,to approve,sent,purchase,approved,first_committee,second_committee</attribute>
+                                 <attribute name="attrs">{'invisible': [('state','not in',('approved','second_committee'))]}</attribute>
+                            </button>
+                           -->
+
+                        <field name="state" position="attributes">
+                            <attribute name="statusbar_visible">draft,sent,purchase,done</attribute>
+                        </field>
+
+                    </field>
+                </record>
+            </data>
+        </openerp>

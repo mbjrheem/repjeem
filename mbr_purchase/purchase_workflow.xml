@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+        <openerp>
+            <data>
+                <record id="purchase_workflow" model="workflow">
+                    <field name="name">mbr.purchase.workflow</field>
+                    <field name="osv">purchase.order</field>
+                    <field name="on_create">True</field>
+                </record>
+
+                <record id="activity_first_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="purchase_workflow"/>
+                    <field name="flow_start">True</field>
+                    <field name="name">first_approve</field>
+                    <field name="kind">dummy</field>
+                </record>
+
+                  <record id="activity_second_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="purchase_workflow"/>
+                    <field name="flow_start">True</field>
+                    <field name="name">second_approve</field>
+                       <field name="kind">function</field>
+                     <field name="action">button_second_approve()</field>
+                </record>
+
+                  <record id="activity_third_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="purchase_workflow"/>
+                    <field name="flow_start">True</field>
+                    <field name="name">third_approve</field>
+                    <field name="kind">dummy</field>
+                </record>
+
+
+
+                 <record id="activity_approve" model="workflow.activity">
+                    <field name="wkf_id" ref="purchase_workflow"/>
+                    <field name="flow_stop">True</field>
+                    <field name="name">approve</field>
+                    <field name="kind">function</field>
+                     <field name="action">button_approve()</field>
+                </record>
+
+                <!--  transition  -->
+
+                  <!--  transition  -->
+                <record id="trans_first_to_approve" model="workflow.transition">
+                    <field name="act_from" ref="activity_first_approve"/>
+                    <field name="act_to" ref="activity_approve"/>
+                    <field name="signal">button_first_approve</field>
+                     <field name="condition">(((amount_total &lt; 5000) and company_id.email == 'info@mbrgroup.sd') or ((amount_total &lt; 5000) and company_id.email == 'africaoffice@mbrgroup.sd') or ((amount_total &lt; 5000) and company_id.email == 'saudioffice@mbrgroup.sd') or ((amount_total &lt; 5000) and company_id.email == 'chadoffice@mbrgroup.sd') or ((amount_total &lt; 5000) and company_id.email == 'egyptoffice@mbrgroup.sd'))
+                    </field>
+                </record>
+
+
+                  <record id="trans_first_to_second" model="workflow.transition">
+                    <field name="act_from" ref="activity_first_approve"/>
+                    <field name="act_to" ref="activity_second_approve"/>
+                    <field name="signal">button_first_approve</field>
+                </record>
+
+
+
+
+                <record id="trans_second_to_approve" model="workflow.transition">
+                    <field name="act_from" ref="activity_second_approve"/>
+                    <field name="act_to" ref="activity_approve"/>
+                    <field name="signal">button_second_approve</field>
+                    <field name="condition">(((amount_total &lt; 10000) and company_id.email == 'info@mbrgroup.sd') or ((amount_total &lt; 10000) and company_id.email == 'africaoffice@mbrgroup.sd') or ((amount_total &lt; 10000) and company_id.email == 'saudioffice@mbrgroup.sd') or ((amount_total &lt; 10000) and company_id.email == 'chadoffice@mbrgroup.sd') or ((amount_total &lt; 10000) and company_id.email == 'egyptoffice@mbrgroup.sd'))
+                    </field>
+                </record>
+                 <record id="trans_second_to_third" model="workflow.transition">
+                    <field name="act_from" ref="activity_second_approve"/>
+                    <field name="act_to" ref="activity_third_approve"/>
+                    <field name="signal">button_second_approve</field>
+                </record>
+
+
+                <record id="trans_third_to_approve" model="workflow.transition">
+                    <field name="act_from" ref="activity_third_approve"/>
+                    <field name="act_to" ref="activity_approve"/>
+                    <field name="signal">button_third_approve</field>
+                    <!--
+                    <field name="condition">(((amount_total &lt; 30000) and company_id.email == 'info@mbrgroup.sd') or ((amount_total &lt; 30000) and company_id.email == 'africaoffice@mbrgroup.sd') or ((amount_total &lt; 30000) and company_id.email == 'saudioffice@mbrgroup.sd') or ((amount_total &lt; 30000) and company_id.email == 'chadoffice@mbrgroup.sd') or((amount_total &lt; 30000) and company_id.email == 'egyptoffice@mbrgroup.sd'))
+                    </field>
+                      -->
+                </record>
+
+
+
+        </data>
+    </openerp>

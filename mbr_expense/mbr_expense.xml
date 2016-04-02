@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+        <openerp>
+            <data>
+
+                <!--
+
+                <record id="hr_expense.view_expenses_tree" model="ir.ui.view">
+                     <field name="groups_id" eval="[(6,0,[ref('mbr_expense.group_hr_expesne_direct_manager')])]"/>
+                </record>
+                -->
+            <record id="mbr_view_expenses_tree" model="ir.ui.view">
+            <field name="name">mbr.hr.expense.tree</field>
+            <field name="model">hr.expense</field>
+             <field name="inherit_id" ref="hr_expense.view_expenses_tree"/>
+            <field name="arch" type="xml">
+                 <button name="approve_expenses" position="attributes">
+
+                    <attribute name="states">confirm</attribute>
+                     <attribute name="groups">base.group_hr_manager</attribute>
+
+
+                </button>
+                  <button name="approve_expenses" position="after">
+                       <button name="%(hr_expense.hr_expense_refuse_wizard_action)d" states="confirm" string="Click here to refuse"
+                            type="action" icon="fa-times" groups="base.group_hr_manager"/>
+                  </button>
+                <button name="submit_expenses" position="after">
+
+                    <button name="confirm_expenses" states="submit" string="Confirm" type="object" icon="fa-check"/>
+
+
+
+
+                    <button name="%(hr_expense.hr_expense_refuse_wizard_action)d" states="submit" string="Click here to refuse"
+                            type="action" icon="fa-times" groups="mbr_expense.group_hr_expesne_direct_manager"/>
+
+
+
+
+                </button>
+
+
+
+
+
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+                <record id="hr_expense_form_view_inherited" model="ir.ui.view">
+                    <field name="name">MBR Expense</field>
+                    <field name="model">hr.expense</field>
+                    <field name="inherit_id" ref="hr_expense.hr_expense_form_view"/>
+                    <field name="arch" type="xml">
+
+
+
+
+                        <button name="approve_expenses" position="after">
+                          <button name="confirm_expenses" states="submit" string="Confirm" type="object" groups="mbr_expense.group_hr_expesne_direct_manager" class="oe_highlight"/>
+                        </button>
+
+
+                         <button name="approve_expenses" position="attributes">
+
+                             <attribute name="states">confirm</attribute>
+                             <attribute name="groups">base.group_hr_manager</attribute>
+                         </button>
+
+                        <button name="%(hr_expense.hr_expense_refuse_wizard_action)d" position="after">
+
+                            <button name="%(hr_expense.hr_expense_refuse_wizard_action)d" states="confirm" string="Refuse" type="action" groups="base.group_hr_manager"/>
+
+                        </button>
+
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submit,confirm,approve,post,done" statusbar_colors='{"submit":"blue","cancel":"red"}'/>
+
+
+
+
+
+
+                    </field>
+                </record>
+
+
+              <record id="view_hr_expense_filter_inherited" model="ir.ui.view">
+                    <field name="name">mbr.hr.expense.filter</field>
+                    <field name="model">hr.expense</field>
+                   <field name="inherit_id" ref="hr_expense.view_hr_expense_filter"/>
+                    <field name="arch" type="xml">
+
+                             <filter name="submitted" position="attributes">
+
+                                 <attribute name="domain">[('state', '=', 'submit')]</attribute>
+                                 <attribute name="string">To Confirm</attribute>
+
+
+
+                             </filter>
+
+                            <filter name="submitted" position="after">
+                                    <filter domain="[('state', '=', 'confirm')]" string="To Approve" name="confirmed" help="Confirmedddd Expenses"/>
+                            </filter>
+
+
+
+
+
+                    </field>
+
+                </record>
+
+
+
+
+        <record id="action_admin_approve_expense" model="ir.actions.act_window">
+            <field name="name">Expenses for Administrative approval</field>
+            <field name="res_model">hr.expense</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph</field>
+            <field name="context">{'search_default_confirmed': 1, 'needaction_menu_ref': 'hr_expense.menu_expense_all'}</field>
+            <field name="search_view_id" ref="view_hr_expense_filter_inherited"/>
+            <field name="view_id" ref="hr_expense.view_expenses_tree"/>
+
+        </record>
+
+
+
+
+      <record id="action_request_approve_expense_inherited" model="ir.actions.act_window">
+        <field name="inherit_id" ref="hr_expense.action_request_approve_expense"/>
+        <field name="name">Expenses to Confirm</field>
+        <field name="res_model">hr.expense</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph</field>
+            <field name="context">{'search_default_submitted': 1, 'needaction_menu_ref': 'hr_expense.menu_expense_all'}</field>
+            <field name="search_view_id" ref="hr_expense.view_hr_expense_filter"/>
+            <field name="view_id" ref="hr_expense.view_expenses_tree"/>
+
+
+    </record>
+
+            <record id="hr_expense.menu_expense_to_approve" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('mbr_expense.group_hr_expesne_direct_manager')])]"/>
+            </record>
+
+           <menuitem id="hr_expense.menu_expense_to_approve" action="action_request_approve_expense_inherited" name="To Confirm" parent="hr_expense.menu_hr_expense_root"/>
+
+
+            <menuitem id="menu_expense_to_admin_approve" action="action_admin_approve_expense" name="To Approve" parent="hr_expense.menu_hr_expense_root" groups="base.group_hr_manager"/>
+
+
+
+
+
+
+
+
+                <!--
+
+               <menuitem id="menu_expense_to_confirm" action="action_request_confirm_expense" name="To Confirm" parent="hr_expense.menu_hr_expense_root" groups="mbr_expense.group_hr_expesne_direct_manager"/>
+
+               <record id="action_request_confirm_expense" model="ir.actions.act_window">
+            <field name="name">Expenses to Confirm</field>
+            <field name="res_model">hr.expense</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph</field>
+            <field name="context">{'search_default_submitted': 1, 'needaction_menu_ref': 'hr_expense.menu_expense_all'}</field>
+            <field name="search_view_id" ref="view_hr_expense_filter"/>
+            <field name="view_id" ref="view_expenses_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create new expenses.
+              </p><p>
+                Once you have created your expense, submit it to your manager who will validate it.
+              </p>
+            </field>
+        </record>
+
+        -->
+
+
+
+
+            </data>
+        </openerp>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+        <openerp>
+            <data>
+                <record id="view_form_sale_order_inherited" model="ir.ui.view">
+                    <field name="name">MBR Sale Order</field>
+                    <field name="model">sale.order</field>
+                    <field name="inherit_id" ref="sale.view_order_form"/>
+                    <field name="arch" type="xml">
+
+
+
+
+
+                         <button name="action_confirm" position="after">
+                            <button name="button_approve" type="object" string="Confirm"/>
+
+                         </button>
+
+
+
+
+                         <button name="action_confirm" position="replace">
+                         </button>
+
+
+
+
+
+
+
+
+                    </field>
+                </record>
+            </data>
+        </openerp>

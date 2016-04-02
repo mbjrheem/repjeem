@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+        <record id="mrp_company" model="ir.ui.view">
+            <field name="name">res.company.mrp.config</field>
+            <field name="model">res.company</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='logistics_grp']" position="inside">
+
+
+                        <field name="po_level_one_max_amount"/>
+                        <field name="po_level_two_max_amount"/>
+                        <field name="po_level_three_max_amount"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

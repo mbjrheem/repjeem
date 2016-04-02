@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_saudi_egy_shipment_saudi_egy_shipment,saudi_egy_shipment.saudi_egy_shipment,model_saudi_egy_shipment_saudi_egy_shipment,,1,0,0,0
