@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+<data noupdate="0">
+<!-- multi -->
+
+
+    <record model="ir.rule" id="stock_user_warehouse">
+        <field name="name">Warehouse user access</field>
+        <field name="model_id" ref="stock.model_stock_warehouse"/>
+        <field name="domain_force">[('company_id','=',10)]</field>
+        <field name="global" eval="True"/>
+
+
+    </record>
+
+
+
+
+<!--
+
+<field name="groups" eval="[(4,ref('stock.group_stock_user'))]"/>
+
+<delete model="ir.rule" id="stock.stock_location_comp_rule"/>
+    <record model="ir.rule" id="stock_warehouse_comp_rule">
+        <field name="name">Warehouse multi-company</field>
+        <field name="model_id" ref="model_stock_warehouse"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+    -->
+</data>
+</openerp>
